@@ -658,6 +658,114 @@ svg {
   color: var(--muted);
 }
 
+.care-directory {
+  padding-top: 52px;
+}
+
+.care-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.care-directory-grid article,
+.about-section,
+.content-layout article,
+.content-layout aside {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 18px 46px rgba(24, 38, 71, 0.07);
+}
+
+.care-directory-grid article {
+  padding: 24px;
+}
+
+.care-directory-grid h3,
+.about-section h2,
+.content-page h1,
+.content-layout h2 {
+  margin: 0;
+  color: var(--brand-deep);
+  letter-spacing: 0;
+  line-height: 1.04;
+}
+
+.care-directory-grid h3 {
+  font-size: 1.5rem;
+}
+
+.care-directory-grid p,
+.about-copy p,
+.content-layout p {
+  color: var(--muted);
+}
+
+.care-directory-grid ul,
+.doctor-copy ul,
+.content-layout ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 18px;
+}
+
+.care-directory-grid li,
+.doctor-copy li,
+.content-layout li {
+  color: var(--ink);
+  font-weight: 760;
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.75fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 58px);
+  padding: clamp(26px, 5vw, 44px);
+}
+
+.about-section span,
+.content-page > span {
+  display: block;
+  color: var(--coral-deep);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.about-section h2 {
+  margin-top: 10px;
+  font-size: clamp(2.1rem, 4.2vw, 4rem);
+}
+
+.about-copy {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.about-copy p {
+  margin: 0;
+}
+
+.about-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 8px;
+}
+
+.about-points span {
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--brand-deep);
+  background: var(--aqua-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 .doctors-section {
   padding-top: 28px;
 }
@@ -716,6 +824,10 @@ svg {
   margin: 0;
   color: var(--muted);
   font-weight: 650;
+}
+
+.doctor-copy ul {
+  margin: 16px 0 0;
 }
 
 .first-visit-section {
@@ -904,6 +1016,80 @@ svg {
   border-radius: 8px;
   color: var(--warm-text);
   background: var(--warm-panel);
+}
+
+.booking-handoff h3 {
+  margin: 0;
+  color: var(--brand-deep);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.booking-handoff p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.handoff-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.content-page {
+  padding-top: 82px;
+}
+
+.content-page > .text-link {
+  margin: 0 0 28px;
+}
+
+.content-page h1 {
+  max-width: 920px;
+  margin-top: 10px;
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 22px;
+  align-items: start;
+  margin-top: 34px;
+}
+
+.content-layout article,
+.content-layout aside {
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.content-layout article {
+  display: grid;
+  gap: 18px;
+}
+
+.content-layout article p,
+.content-layout article ul {
+  margin: 0;
+  font-size: 1.04rem;
+}
+
+.content-layout aside {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  gap: 12px;
+}
+
+.content-layout aside strong {
+  color: var(--brand-deep);
+  font-size: 1.2rem;
+}
+
+.content-layout aside span {
+  color: var(--muted);
+  font-weight: 800;
 }
 
 .loading-row {
@@ -1101,11 +1287,14 @@ figcaption {
 
   .services-shell,
   .service-card,
+  .care-directory-grid,
+  .about-section,
   .doctor-grid,
   .first-visit-section,
   .booking-grid,
   .mobile-app-section,
-  .location-section {
+  .location-section,
+  .content-layout {
     grid-template-columns: 1fr;
   }
 
@@ -1119,6 +1308,10 @@ figcaption {
 
   .portal-plan {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .content-layout aside {
+    position: static;
   }
 }
 
@@ -1223,6 +1416,7 @@ figcaption {
 
   .service-tabs,
   .form-row,
+  .care-directory-grid,
   .doctor-grid,
   .topic-grid,
   .portal-plan,
@@ -1251,7 +1445,11 @@ figcaption {
     grid-template-columns: 1fr;
   }
 
-.booking-section,
+  .handoff-actions .btn {
+    width: 100%;
+  }
+
+  .booking-section,
   .first-visit-section {
     padding-inline: 16px;
   }

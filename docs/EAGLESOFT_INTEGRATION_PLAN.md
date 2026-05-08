@@ -44,7 +44,7 @@ flowchart LR
 
 1. Patient chooses service path.
 2. API asks PMS adapter for available appointment windows.
-3. Patient submits minimal contact and concern details.
+3. Patient submits minimal scheduling/contact details through a HIPAA-ready API.
 4. API validates request and sends it to the PMS adapter.
 5. PMS adapter creates or holds the appointment through approved API/partner access.
 6. API returns `PENDING_PMS_CONFIRMATION` or `CONFIRMED`.
@@ -66,3 +66,4 @@ flowchart LR
 - Define new-patient, emergency, insurance, no-show, and buffer rules.
 - Add persistent storage for booking requests and integration attempts.
 - Add audit logging, rate limits, monitoring, and HIPAA-aligned operational controls.
+- Avoid collecting free-form symptoms, diagnosis, insurance, or medical history through a public demo form.

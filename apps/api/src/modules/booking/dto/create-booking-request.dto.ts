@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsIn, IsOptional, IsString, Length } from "class-validator";
+import { IsBoolean, IsEmail, IsIn, IsOptional, IsString, Length, MaxLength } from "class-validator";
 import { dentalServices, type DentalServiceId } from "@vadentalcare/shared";
 
 const serviceIds = dentalServices.map((service) => service.id);
@@ -38,7 +38,8 @@ export class CreateBookingRequestDto {
   @IsBoolean()
   isNewPatient!: boolean;
 
+  @IsOptional()
   @IsString()
-  @Length(4, 1000)
-  concern!: string;
+  @MaxLength(240)
+  schedulingNote?: string;
 }

@@ -24,7 +24,7 @@ export function ServicesExplorer({ services }: ServicesExplorerProps) {
         <h2>Find the care you need.</h2>
         <p>
           Browse the main care areas, then choose the specific topic that matches your question or
-          concern.
+          care goal.
         </p>
       </div>
 

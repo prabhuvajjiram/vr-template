@@ -17,10 +17,19 @@ export type DentalService = {
   urgency: "routine" | "soon" | "urgent";
 };
 
+export type CarePage = {
+  slug: string;
+  title: string;
+  serviceId: DentalServiceId;
+  type: "service" | "topic";
+  topic?: string;
+};
+
 export type PracticeProfile = {
   name: string;
   city: string;
   state: string;
+  websiteUrl: string;
   phoneDisplay: string;
   phoneE164: string;
   addressLines: string[];
@@ -49,7 +58,7 @@ export type BookingRequest = {
   phone: string;
   email?: string;
   isNewPatient: boolean;
-  concern: string;
+  schedulingNote?: string;
 };
 
 export type BookingRequestResult = {
@@ -63,6 +72,7 @@ export const practiceProfile: PracticeProfile = {
   name: "Virginia Dental Care",
   city: "Arlington",
   state: "VA",
+  websiteUrl: "https://vadentalcare.com",
   phoneDisplay: "(703) 276-1010",
   phoneE164: "+17032761010",
   addressLines: ["915 N Quincy St", "Arlington, VA 22203"],
@@ -76,9 +86,9 @@ export const dentalServices: DentalService[] = [
     id: "general-dentistry",
     name: "General Dentistry",
     shortName: "General",
-    summary: "Preventive cleanings, exams, X-rays, fillings, and practical treatment planning.",
+    summary: "Preventive cleanings, exams, X-rays, fillings, crowns, bridges, root canals, and practical treatment planning.",
     imageUrl: "https://vadentalcare.com/wp-content/uploads/2025/01/generaldentistry_img.jpg",
-    treatments: ["Cleanings and exams", "Fillings and crowns", "Oral cancer screening"],
+    treatments: ["Cleanings and exams", "Fillings, crowns, and bridges", "Root canals and oral cancer screening"],
     topics: [
       "Types of Cleanings",
       "Cavities",
@@ -98,9 +108,9 @@ export const dentalServices: DentalService[] = [
     id: "cosmetic-dentistry",
     name: "Cosmetic Dentistry",
     shortName: "Cosmetic",
-    summary: "Smile-focused care for whitening, bonding, veneers, and natural-looking restorations.",
+    summary: "Smile-focused care for porcelain veneers, bonded veneers, whitening, Invisalign, and natural-looking restorations.",
     imageUrl: "https://vadentalcare.com/wp-content/uploads/2025/01/cosmeticdentistry_img.jpg",
-    treatments: ["Whitening", "Veneer consults", "Smile restoration planning"],
+    treatments: ["Teeth whitening", "Porcelain and bonded veneers", "Clear braces and Invisalign"],
     topics: ["Porcelain Veneers", "Bonded Veneers", "Clear Braces/Invisalign", "Teeth Whitening"],
     durationMinutes: 60,
     urgency: "routine"
@@ -109,9 +119,9 @@ export const dentalServices: DentalService[] = [
     id: "periodontics",
     name: "Periodontics",
     shortName: "Gum Care",
-    summary: "Gum-health evaluation, maintenance, and periodontal treatment explained clearly.",
+    summary: "Gum-health evaluation, deep cleaning, recession care, abscess evaluation, crown lengthening, and periodontal maintenance.",
     imageUrl: "https://vadentalcare.com/wp-content/uploads/2025/01/periodontalservices_img.jpg",
-    treatments: ["Gum evaluation", "Deep cleaning path", "Maintenance visits"],
+    treatments: ["Gum disease evaluation", "Deep cleaning and maintenance", "Gum recession and crown lengthening"],
     topics: [
       "Causes of Gum Disease",
       "Treatment for Gum Disease",
@@ -131,9 +141,9 @@ export const dentalServices: DentalService[] = [
     id: "implant-dentistry",
     name: "Implant Dentistry",
     shortName: "Implants",
-    summary: "A consult path for missing teeth, treatment timelines, and implant restoration options.",
+    summary: "Consults for missing teeth, dental implants, bone grafting, sinus lifts, snap-on dentures, and teeth-in-a-day options.",
     imageUrl: "https://vadentalcare.com/wp-content/uploads/2025/01/dental-implatns.jpg",
-    treatments: ["Implant consults", "Missing-tooth options", "Surgical/restorative planning"],
+    treatments: ["Dental implant consults", "Bone grafting and sinus lift planning", "Snap-on dentures and teeth in a day"],
     topics: ["Dental Implants", "Bone Grafting", "Sinus Lift", "Snap on Dentures", "Teeth in a Day"],
     durationMinutes: 75,
     urgency: "routine"
@@ -142,20 +152,43 @@ export const dentalServices: DentalService[] = [
     id: "emergency-dentistry",
     name: "Emergency Dentistry",
     shortName: "Emergency",
-    summary: "Fast triage for tooth pain, swelling, broken teeth, and urgent dental symptoms.",
+    summary: "Fast triage for tooth pain, swelling, broken teeth, lost crowns or fillings, and urgent dental symptoms.",
     imageUrl: "https://vadentalcare.com/wp-content/uploads/2025/01/dentist-visit-1-1.jpg",
     treatments: ["Tooth pain", "Broken or chipped teeth", "Urgent appointment request"],
     topics: [
       "Tooth Pain",
       "Broken or Chipped Teeth",
       "Swelling or Infection",
-      "Lost Crown or Filling",
-      "Emergency Extraction"
+      "Lost Crown or Filling"
     ],
     durationMinutes: 45,
     urgency: "urgent"
   }
 ];
+
+export function slugifyCareTopic(topic: string): string {
+  return topic
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export const carePages: CarePage[] = dentalServices.flatMap((service) => [
+  {
+    slug: service.id,
+    title: service.name,
+    serviceId: service.id,
+    type: "service" as const
+  },
+  ...service.topics.map((topic) => ({
+    slug: slugifyCareTopic(topic),
+    title: topic,
+    serviceId: service.id,
+    type: "topic" as const,
+    topic
+  }))
+]);
 
 export function findDentalService(serviceId: DentalServiceId): DentalService {
   const service = dentalServices.find((item) => item.id === serviceId);
@@ -163,4 +196,8 @@ export function findDentalService(serviceId: DentalServiceId): DentalService {
     throw new Error(`Unknown dental service: ${serviceId}`);
   }
   return service;
+}
+
+export function findCarePageBySlug(slug: string): CarePage | undefined {
+  return carePages.find((page) => page.slug === slug);
 }

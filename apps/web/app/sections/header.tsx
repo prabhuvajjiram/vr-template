@@ -54,8 +54,14 @@ export function Header({ practice }: HeaderProps) {
         <a href="#doctors" onClick={() => setOpen(false)}>
           Doctors
         </a>
+        <a href="#about" onClick={() => setOpen(false)}>
+          About
+        </a>
         <a href="#first-visit" onClick={() => setOpen(false)}>
           First Visit
+        </a>
+        <a href="#testimonials" onClick={() => setOpen(false)}>
+          Reviews
         </a>
         <a href="#location" onClick={() => setOpen(false)}>
           Location

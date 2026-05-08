@@ -27,35 +27,133 @@ const testimonials = [
 const doctors = [
   {
     name: "Dr. Omer Akmal",
-    role: "Periodontist and implant dentist",
+    role: "Board-certified periodontist and implant dentist",
     imageUrl: "/images/dr-omer-akmal.jpg",
     position: "center",
     summary:
-      "Specialty care for periodontal treatment and implant planning in the same Arlington office."
+      "Dr. Akmal brings periodontal and implant surgery training together with a psychology background, helping anxious patients understand gum disease, surgical options, and prevention.",
+    credentials: [
+      "DDS, Baltimore College of Dental Surgery",
+      "Advanced Education in General Dentistry",
+      "Periodontics and implant surgery training, University of Pittsburgh"
+    ]
   },
   {
     name: "Dr. Anna Bruhn",
-    role: "Family dentist",
+    role: "Family and restorative dentist",
     imageUrl: "/images/dr-anna-bruhn.jpg",
     position: "center",
     summary:
-      "Calm general dentistry with time to explain treatment and keep the visit comfortable."
+      "Dr. Bruhn provides comprehensive general dentistry with a focus on comfort, clear explanations, and long-term patient relationships.",
+    credentials: [
+      "DMD, Columbia University College of Dental Medicine",
+      "General practice residency, Baltimore VA Hospital",
+      "Training in extractions, root canals, crowns, and bridgework"
+    ]
   }
 ];
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? practiceProfile.websiteUrl;
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: practiceProfile.name,
+  url: siteUrl,
+  telephone: practiceProfile.phoneDisplay,
+  image: `${siteUrl}/images/dr-omer-akmal.jpg`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "915 N Quincy St",
+    addressLocality: "Arlington",
+    addressRegion: "VA",
+    postalCode: "22203",
+    addressCountry: "US"
+  },
+  openingHours: "Mo-Fr 08:00-16:00",
+  medicalSpecialty: ["Dentistry", "Periodontics", "Dental Implants", "Cosmetic Dentistry"],
+  areaServed: ["Arlington VA", "Ballston", "Clarendon", "Virginia Square"],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Dental services",
+    itemListElement: dentalServices.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "MedicalProcedure",
+        name: service.name,
+        description: service.summary
+      }
+    }))
+  }
+};
 
 export default function HomePage() {
   return (
     <>
       <Header practice={practiceProfile} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
       <main>
         <Hero practice={practiceProfile} />
         <ServicesExplorer services={dentalServices} />
+        <section className="section care-directory" aria-labelledby="care-directory-title">
+          <div className="section-heading">
+            <span>Service directory</span>
+            <h2 id="care-directory-title">Detailed dental care in one Arlington office.</h2>
+            <p>
+              The site keeps the full care menu visible for patients and search engines, without
+              forcing visitors through a crowded dropdown.
+            </p>
+          </div>
+          <div className="care-directory-grid">
+            {dentalServices.map((service) => (
+              <article key={service.id}>
+                <h3>{service.name}</h3>
+                <p>{service.summary}</p>
+                <ul>
+                  {service.topics.map((topic) => (
+                    <li key={topic}>{topic}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="section about-section" id="about">
+          <div>
+            <span>About Virginia Dental Care</span>
+            <h2>Preventive, surgical, cosmetic, and family dentistry for Arlington.</h2>
+          </div>
+          <div className="about-copy">
+            <p>
+              Virginia Dental Care has served the Arlington community for more than a decade as a
+              family dental clinic with both general dentistry and surgical periodontal support in
+              the same practice.
+            </p>
+            <p>
+              The care philosophy is prevention first: explain dental disease clearly, catch smaller
+              problems early, and help patients feel comfortable enough to stay engaged in their
+              treatment decisions.
+            </p>
+            <div className="about-points">
+              <span>General dentistry</span>
+              <span>Cosmetic dentistry</span>
+              <span>Orthodontic options</span>
+              <span>Periodontics</span>
+              <span>Endodontics</span>
+              <span>Oral surgery</span>
+              <span>Dental implants</span>
+            </div>
+          </div>
+        </section>
         <section className="section doctors-section" id="doctors">
           <div className="section-heading">
             <h2>Meet your Arlington dentists.</h2>
             <p>
-              Patients can see who they are visiting before they arrive, with specialty and family
-              dental care available in one office.
+              Patients can see who they are visiting before they arrive, with board-certified
+              periodontal care and comprehensive family dentistry available in one office.
             </p>
           </div>
           <div className="doctor-grid">
@@ -75,6 +173,11 @@ export default function HomePage() {
                   <span>{doctor.role}</span>
                   <h3>{doctor.name}</h3>
                   <p>{doctor.summary}</p>
+                  <ul>
+                    {doctor.credentials.map((credential) => (
+                      <li key={credential}>{credential}</li>
+                    ))}
+                  </ul>
                 </div>
               </article>
             ))}
@@ -110,7 +213,7 @@ export default function HomePage() {
             </article>
           </div>
         </section>
-        <BookingWidget services={dentalServices} />
+        <BookingWidget services={dentalServices} practice={practiceProfile} />
         <MobileAppSection />
         <section className="section testimonials" id="testimonials">
           <div className="section-heading">
