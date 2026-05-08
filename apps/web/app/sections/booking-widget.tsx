@@ -66,7 +66,7 @@ export function BookingWidget({ services }: BookingWidgetProps) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           })
-        : await fetch("/", {
+        : await fetch("/__forms.html", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: encodeFormData({
@@ -133,8 +133,6 @@ export function BookingWidget({ services }: BookingWidgetProps) {
           className="booking-form"
           name="appointment-request"
           method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
           onSubmit={submitBooking}
         >
           <input type="hidden" name="form-name" value="appointment-request" />
