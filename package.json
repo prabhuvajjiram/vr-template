@@ -1,0 +1,22 @@
+{
+  "name": "vadentalcare-redesign-platform",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Production-shaped redesign platform for Virginia Dental Care: Next.js web/PWA, NestJS API, and PMS integration boundary.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run build -w @vadentalcare/shared && concurrently -n web,api -c cyan,magenta \"npm run dev -w @vadentalcare/web\" \"npm run dev -w @vadentalcare/api\"",
+    "dev:web": "npm run dev -w @vadentalcare/web",
+    "dev:api": "npm run dev -w @vadentalcare/api",
+    "build": "npm run build -w @vadentalcare/shared && npm run build -w @vadentalcare/api && npm run build -w @vadentalcare/web",
+    "build:web": "npm run build -w @vadentalcare/shared && npm run build -w @vadentalcare/web",
+    "typecheck": "npm run build -w @vadentalcare/shared && npm run typecheck -w @vadentalcare/api && npm run typecheck -w @vadentalcare/web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.3"
+  }
+}
