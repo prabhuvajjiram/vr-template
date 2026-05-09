@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { practiceProfile } from "@vadentalcare/shared";
+import { getSiteUrl } from "./site-url";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? practiceProfile.websiteUrl;
+const siteUrl = getSiteUrl();
 
 export default function robots(): MetadataRoute.Robots {
   return {

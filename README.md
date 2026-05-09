@@ -39,6 +39,12 @@ This repo includes `netlify.toml` for a Git-connected Netlify deploy:
 
 Do not set `NEXT_PUBLIC_API_BASE_URL` for the demo-only Netlify site unless the Nest API is deployed separately. Without that variable, the booking area routes patients to the existing online booking link and phone number instead of storing form submissions.
 
+Next.js generates SEO files from the app routes:
+
+- `apps/web/app/sitemap.ts` is served as `/sitemap.xml`.
+- `apps/web/app/robots.ts` is served as `/robots.txt`.
+- Set `NEXT_PUBLIC_SITE_URL` on the final VPS/domain so canonical URLs and sitemap URLs match the real public site. Netlify can fall back to its `URL` environment variable for the temporary preview.
+
 ## Production VPS Notes
 
 - Deploy `apps/web` as the public Next.js app.

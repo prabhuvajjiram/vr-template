@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
-import { carePages, practiceProfile } from "@vadentalcare/shared";
+import { carePages } from "@vadentalcare/shared";
+import { getSiteUrl } from "./site-url";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? practiceProfile.websiteUrl;
+const siteUrl = getSiteUrl();
 const supportSlugs = ["about-us", "our-team", "testimonials", "contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {

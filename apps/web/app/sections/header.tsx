@@ -10,20 +10,37 @@ type HeaderProps = {
 };
 
 type Theme = "light" | "dark";
+const themeStorageKey = "vdc-theme";
 
 export function Header({ practice }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const activeTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-    setTheme(activeTheme);
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function applyTheme() {
+      const stored = window.localStorage.getItem(themeStorageKey);
+      const systemTheme: Theme = media.matches ? "dark" : "light";
+      const activeTheme: Theme = stored === "dark" || stored === "light" ? stored : systemTheme;
+      document.documentElement.dataset.theme = activeTheme;
+      setTheme(activeTheme);
+    }
+
+    applyTheme();
+    media.addEventListener("change", applyTheme);
+    window.addEventListener("storage", applyTheme);
+
+    return () => {
+      media.removeEventListener("change", applyTheme);
+      window.removeEventListener("storage", applyTheme);
+    };
   }, []);
 
   function toggleTheme() {
     const nextTheme: Theme = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem("vdc-theme", nextTheme);
+    window.localStorage.setItem(themeStorageKey, nextTheme);
     setTheme(nextTheme);
   }
 
@@ -76,7 +93,8 @@ export function Header({ practice }: HeaderProps) {
         <button
           className="theme-toggle"
           type="button"
-          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode. System preference is used by default.`}
+          title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
           onClick={toggleTheme}
         >
           {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}

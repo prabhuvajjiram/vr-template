@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { practiceProfile } from "@vadentalcare/shared";
+import { getSiteUrl } from "./site-url";
 import "./globals.css";
 
 const themeScript = `
 (() => {
   try {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
     const stored = window.localStorage.getItem("vdc-theme");
-    const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    document.documentElement.dataset.theme = stored === "dark" || stored === "light" ? stored : system;
+    const systemTheme = media.matches ? "dark" : "light";
+    document.documentElement.dataset.theme = stored === "dark" || stored === "light" ? stored : systemTheme;
   } catch {
     document.documentElement.dataset.theme = "light";
   }
@@ -15,7 +16,7 @@ const themeScript = `
 `;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? practiceProfile.websiteUrl),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "Virginia Dental Care | Dentist in Arlington, VA",
     template: "%s | Virginia Dental Care"

@@ -8,6 +8,7 @@ import { LocationSection } from "./sections/location-section";
 import { MobileBottomBar } from "./sections/mobile-bottom-bar";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getSiteUrl } from "./site-url";
 
 const testimonials = [
   {
@@ -53,7 +54,7 @@ const doctors = [
   }
 ];
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? practiceProfile.websiteUrl;
+const siteUrl = getSiteUrl();
 
 const localBusinessSchema = {
   "@context": "https://schema.org",

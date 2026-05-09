@@ -238,14 +238,23 @@ svg {
 
 .theme-toggle {
   display: inline-grid;
+  flex: 0 0 46px;
   width: 46px;
+  min-width: 46px;
   height: 46px;
+  padding: 0;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--brand-deep);
   background: var(--surface);
   cursor: pointer;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.theme-toggle svg {
+  display: block;
 }
 
 .menu-button {
