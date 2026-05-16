@@ -28,9 +28,11 @@ const testimonials = [
 const doctors = [
   {
     name: "Dr. Omer Akmal",
+    firstLine: "Omer",
+    lastLine: "Akmal",
     role: "Board-certified periodontist and implant dentist",
     imageUrl: "/images/dr-omer-akmal.jpg",
-    position: "center",
+    position: "right center",
     summary:
       "Dr. Akmal brings periodontal and implant surgery training together with a psychology background, helping anxious patients understand gum disease, surgical options, and prevention.",
     credentials: [
@@ -41,6 +43,8 @@ const doctors = [
   },
   {
     name: "Dr. Anna Bruhn",
+    firstLine: "Anna",
+    lastLine: "Bruhn",
     role: "Family and restorative dentist",
     imageUrl: "/images/dr-anna-bruhn.jpg",
     position: "center",
@@ -104,8 +108,8 @@ export default function HomePage() {
             <span>Service directory</span>
             <h2 id="care-directory-title">Detailed dental care in one Arlington office.</h2>
             <p>
-              The site keeps the full care menu visible for patients and search engines, without
-              forcing visitors through a crowded dropdown.
+              Explore routine visits, cosmetic goals, gum concerns, dental implants, urgent needs,
+              and related treatment topics before you call or request a visit.
             </p>
           </div>
           <div className="care-directory-grid">
@@ -151,10 +155,10 @@ export default function HomePage() {
         </section>
         <section className="section doctors-section" id="doctors">
           <div className="section-heading">
-            <h2>Meet your Arlington dentists.</h2>
+            <h2>The doctors at Virginia Dental Care.</h2>
             <p>
-              Patients can see who they are visiting before they arrive, with board-certified
-              periodontal care and comprehensive family dentistry available in one office.
+              Learn who provides your care, where each doctor focuses, and which visits may need
+              general dentistry, periodontal, implant, or restorative support.
             </p>
           </div>
           <div className="doctor-grid">
@@ -171,14 +175,20 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="doctor-copy">
-                  <span>{doctor.role}</span>
-                  <h3>{doctor.name}</h3>
+                  <span className="doctor-role">{doctor.role}</span>
+                  <h3>
+                    <span>{doctor.firstLine}</span>
+                    <span>{doctor.lastLine}</span>
+                  </h3>
                   <p>{doctor.summary}</p>
                   <ul>
                     {doctor.credentials.map((credential) => (
                       <li key={credential}>{credential}</li>
                     ))}
                   </ul>
+                  <a className="text-link doctor-cta" href="/our-team">
+                    Read the doctor profile <ArrowRight size={17} />
+                  </a>
                 </div>
               </article>
             ))}

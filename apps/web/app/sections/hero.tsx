@@ -15,8 +15,8 @@ export function Hero({ practice }: HeroProps) {
           <span>Dental Care</span>
         </h1>
         <p>
-          Comprehensive dental care in Arlington for preventive visits, cosmetic goals, gum health,
-          implants, and urgent concerns.
+          Doctor-led dentistry in Arlington with family care, periodontal specialty support,
+          implant planning, cosmetic treatment, and urgent dental guidance in one office.
         </p>
         <div className="hero-actions">
           <a className="btn btn-secondary" href="#services">
@@ -38,15 +38,35 @@ export function Hero({ practice }: HeroProps) {
         </div>
       </div>
 
-      <div className="hero-media">
-        <Image
-          src="https://vadentalcare.com/wp-content/uploads/2025/01/portrait-smiling-young-woman-sitting-chair-dental-clinic-1.jpg"
-          alt="Smiling dental patient in a treatment room"
-          width={2000}
-          height={1333}
-          sizes="(max-width: 900px) 100vw, 48vw"
-          priority
-        />
+      <div className="hero-media doctor-hero" aria-label="Virginia Dental Care doctors">
+        <figure className="hero-doctor">
+          <Image
+            src="/images/dr-omer-akmal.jpg"
+            alt="Dr. Omer Akmal"
+            width={430}
+            height={600}
+            sizes="(max-width: 720px) 100vw, (max-width: 900px) 50vw, 24vw"
+            priority
+          />
+          <figcaption>
+            <strong>Dr. Omer Akmal</strong>
+            <span>Periodontics and implants</span>
+          </figcaption>
+        </figure>
+        <figure className="hero-doctor">
+          <Image
+            src="/images/dr-anna-bruhn.jpg"
+            alt="Dr. Anna Bruhn"
+            width={430}
+            height={600}
+            sizes="(max-width: 720px) 100vw, (max-width: 900px) 50vw, 24vw"
+            priority
+          />
+          <figcaption>
+            <strong>Dr. Anna Bruhn</strong>
+            <span>Family and restorative dentistry</span>
+          </figcaption>
+        </figure>
       </div>
 
       <aside className="hero-panel" aria-label="Practice snapshot">

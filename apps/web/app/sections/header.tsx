@@ -108,6 +108,7 @@ export function Header({ practice }: HeaderProps) {
       <button
         className="menu-button"
         type="button"
+        aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((value) => !value)}

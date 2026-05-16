@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://vadentalcare.com/wp-content/uploads/2025/01/portrait-smiling-young-woman-sitting-chair-dental-clinic-1.jpg",
-        width: 2000,
-        height: 1333,
-        alt: "Smiling dental patient at Virginia Dental Care"
+        url: "/images/dr-omer-akmal.jpg",
+        width: 430,
+        height: 600,
+        alt: "Dr. Omer Akmal at Virginia Dental Care"
       }
     ]
   },

@@ -29,6 +29,7 @@
   --urgent-bg: #ffe5df;
   --urgent-text: #8d2a1b;
   --shadow: 0 24px 70px rgba(24, 38, 71, 0.13);
+  --display: Georgia, "Times New Roman", serif;
   --max: 1180px;
 }
 
@@ -265,10 +266,10 @@ svg {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.88fr);
-  gap: clamp(30px, 5vw, 72px);
+  gap: clamp(36px, 5vw, 78px);
   min-height: auto;
   align-items: center;
-  padding: 86px clamp(20px, 6vw, 76px) 54px;
+  padding: 92px clamp(20px, 6vw, 76px) 58px;
   background: var(--hero-bg);
 }
 
@@ -304,6 +305,62 @@ svg {
   object-fit: cover;
 }
 
+.doctor-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 0;
+  background: var(--surface);
+}
+
+.hero-doctor {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: min(620px, 56vw);
+  margin: 0;
+  overflow: hidden;
+}
+
+.hero-doctor + .hero-doctor {
+  border-left: 1px solid var(--line);
+}
+
+.hero-doctor img {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.hero-doctor:first-child img {
+  object-position: right center;
+}
+
+.hero-doctor figcaption {
+  display: grid;
+  gap: 2px;
+  min-height: 88px;
+  padding: 16px 18px;
+  border-top: 1px solid var(--line);
+  color: var(--brand-deep);
+  background: var(--surface);
+}
+
+.hero-doctor strong {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hero-doctor span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .hero h1,
 .section-heading h2,
 .visit-copy h2,
@@ -315,6 +372,8 @@ svg {
 
 .hero h1 {
   color: var(--brand-deep);
+  font-family: var(--display);
+  font-weight: 500;
   font-size: clamp(4rem, 7.3vw, 6.8rem);
   line-height: 0.9;
   max-width: 620px;
@@ -418,6 +477,8 @@ svg {
 .mobile-app-copy h2,
 .location-copy h2 {
   color: var(--brand-deep);
+  font-family: var(--display);
+  font-weight: 500;
   font-size: clamp(2.5rem, 5vw, 4.7rem);
   line-height: 0.98;
 }
@@ -776,27 +837,33 @@ svg {
 }
 
 .doctors-section {
-  padding-top: 28px;
+  padding-top: 40px;
 }
 
 .doctor-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+  gap: 0;
+  border-top: 1px solid var(--line);
 }
 
 .doctor-card {
   display: grid;
-  grid-template-columns: minmax(180px, 0.72fr) minmax(0, 1fr);
+  grid-template-columns: minmax(300px, 0.62fr) minmax(0, 1fr);
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: 0 18px 46px rgba(24, 38, 71, 0.08);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+
+.doctor-card:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr);
+}
+
+.doctor-card:nth-child(even) .doctor-photo {
+  order: 2;
 }
 
 .doctor-photo {
-  min-height: 380px;
+  min-height: 540px;
   height: 100%;
   overflow: hidden;
   background: var(--mist);
@@ -810,10 +877,13 @@ svg {
 }
 
 .doctor-copy {
-  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(34px, 6vw, 76px);
 }
 
-.doctor-copy span {
+.doctor-role {
   color: var(--brand);
   font-size: 0.77rem;
   font-weight: 950;
@@ -822,21 +892,50 @@ svg {
 }
 
 .doctor-copy h3 {
-  margin: 8px 0 8px;
+  margin: 14px 0 18px;
   color: var(--brand-deep);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 7vw, 6.7rem);
+  font-weight: 500;
   letter-spacing: 0;
-  line-height: 1;
+  line-height: 0.86;
+}
+
+.doctor-copy h2 {
+  margin: 14px 0 18px;
+  color: var(--brand-deep);
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 7vw, 6.7rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 0.86;
+}
+
+.doctor-copy h3 span,
+.doctor-copy h2 span {
+  display: block;
 }
 
 .doctor-copy p {
+  max-width: 620px;
   margin: 0;
   color: var(--muted);
   font-weight: 650;
 }
 
 .doctor-copy ul {
-  margin: 16px 0 0;
+  max-width: 620px;
+  margin: 22px 0 0;
+}
+
+.doctor-cta {
+  margin-top: 24px;
+}
+
+.team-profile-list {
+  display: grid;
+  margin-top: 34px;
+  border-top: 1px solid var(--line);
 }
 
 .first-visit-section {
@@ -1057,6 +1156,8 @@ svg {
 .content-page h1 {
   max-width: 920px;
   margin-top: 10px;
+  font-family: var(--display);
+  font-weight: 500;
   font-size: clamp(2.8rem, 6vw, 5.6rem);
 }
 
@@ -1258,7 +1359,14 @@ figcaption {
     grid-template-columns: auto auto;
   }
 
+  .brand {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
   .menu-button {
+    grid-row: 1;
+    grid-column: 2;
     justify-self: end;
     display: grid;
     width: 42px;
@@ -1305,6 +1413,15 @@ figcaption {
   .location-section,
   .content-layout {
     grid-template-columns: 1fr;
+  }
+
+  .doctor-card,
+  .doctor-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-card:nth-child(even) .doctor-photo {
+    order: 0;
   }
 
   .service-tabs {
@@ -1367,8 +1484,40 @@ figcaption {
     min-height: 300px;
   }
 
+  .hero-doctor {
+    min-height: 360px;
+  }
+
+  .doctor-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-doctor + .hero-doctor {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
   .hero-media img {
     height: 300px;
+  }
+
+  .hero-doctor img {
+    height: 100%;
+  }
+
+  .hero-doctor figcaption {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    padding: 10px;
+  }
+
+  .hero-doctor strong {
+    font-size: 1rem;
+  }
+
+  .hero-doctor span {
+    font-size: 0.66rem;
   }
 
   .hero-review {
@@ -1438,8 +1587,21 @@ figcaption {
     flex-direction: column;
   }
 
-  .doctor-card {
+  .doctor-card,
+  .doctor-card:nth-child(even) {
     grid-template-columns: 1fr;
+  }
+
+  .doctor-copy {
+    padding: 28px 0 42px;
+  }
+
+  .doctor-copy h3 {
+    font-size: clamp(3.1rem, 16vw, 4.8rem);
+  }
+
+  .doctor-copy h2 {
+    font-size: clamp(3.1rem, 16vw, 4.8rem);
   }
 
   .doctor-photo {
@@ -1469,10 +1631,8 @@ figcaption {
   }
 
   .mobile-bottom-bar {
-    position: fixed;
-    right: 14px;
-    bottom: 14px;
-    left: 14px;
+    width: calc(100% - 28px);
+    margin: 0 auto 14px;
     z-index: 70;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1497,7 +1657,7 @@ figcaption {
   }
 
   body {
-    padding-bottom: 72px;
+    padding-bottom: 0;
   }
 }
 

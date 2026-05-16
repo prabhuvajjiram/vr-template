@@ -6,6 +6,7 @@ import {
   findDentalService,
   practiceProfile
 } from "@vadentalcare/shared";
+import Image from "next/image";
 import { Header } from "../sections/header";
 import { LocationSection } from "../sections/location-section";
 import { MobileBottomBar } from "../sections/mobile-bottom-bar";
@@ -56,6 +57,39 @@ const supportPages = {
     ]
   }
 } as const;
+
+const teamProfiles = [
+  {
+    name: "Dr. Omer Akmal",
+    firstLine: "Omer",
+    lastLine: "Akmal",
+    role: "Board-certified periodontist and implant dentist",
+    imageUrl: "/images/dr-omer-akmal.jpg",
+    position: "right center",
+    summary:
+      "Dr. Akmal focuses on periodontics, implant surgery, gum care, surgical extractions, and patient education. His psychology background and surgical training help patients understand complex treatment options clearly.",
+    credentials: [
+      "DDS, Baltimore College of Dental Surgery",
+      "Advanced Education in General Dentistry",
+      "Periodontics and implant surgery training, University of Pittsburgh"
+    ]
+  },
+  {
+    name: "Dr. Anna Bruhn",
+    firstLine: "Anna",
+    lastLine: "Bruhn",
+    role: "Family and restorative dentist",
+    imageUrl: "/images/dr-anna-bruhn.jpg",
+    position: "center",
+    summary:
+      "Dr. Bruhn provides comprehensive general dentistry with experience in extractions, root canals, crowns, bridges, and patient-centered restorative care.",
+    credentials: [
+      "DMD, Columbia University College of Dental Medicine",
+      "General practice residency, Baltimore VA Hospital",
+      "Training in extractions, root canals, crowns, and bridgework"
+    ]
+  }
+];
 
 export function generateStaticParams() {
   return [
@@ -147,6 +181,39 @@ export default async function ContentPage({ params }: PageProps) {
                   Book online
                 </a>
               </aside>
+            </div>
+          ) : slug === "our-team" ? (
+            <div className="team-profile-list">
+              {teamProfiles.map((doctor) => (
+                <article className="doctor-card" key={doctor.name}>
+                  <div className="doctor-photo">
+                    <Image
+                      src={doctor.imageUrl}
+                      alt={`${doctor.name}, ${doctor.role}`}
+                      width={430}
+                      height={600}
+                      sizes="(max-width: 900px) 100vw, 28vw"
+                      style={{ objectPosition: doctor.position }}
+                    />
+                  </div>
+                  <div className="doctor-copy">
+                    <span className="doctor-role">{doctor.role}</span>
+                    <h2>
+                      <span>{doctor.firstLine}</span>
+                      <span>{doctor.lastLine}</span>
+                    </h2>
+                    <p>{doctor.summary}</p>
+                    <ul>
+                      {doctor.credentials.map((credential) => (
+                        <li key={credential}>{credential}</li>
+                      ))}
+                    </ul>
+                    <a className="btn btn-primary doctor-cta" href="/#booking">
+                      Request an appointment
+                    </a>
+                  </div>
+                </article>
+              ))}
             </div>
           ) : (
             <div className="content-layout">

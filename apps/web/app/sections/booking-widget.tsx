@@ -81,8 +81,8 @@ export function BookingWidget({ services, practice }: BookingWidgetProps) {
         <h2>Request an appointment.</h2>
         <p>
           Choose a care path, then continue through the current secure booking workflow or call the
-          office. Do not include symptoms, diagnoses, insurance details, or medical history in this
-          preview.
+          office. Please do not include symptoms, diagnoses, insurance details, or medical history
+          in a general appointment message.
         </p>
       </div>
 
@@ -93,7 +93,7 @@ export function BookingWidget({ services, practice }: BookingWidgetProps) {
           <p>
             {apiEnabled
               ? activeService.summary
-              : "Use the current online booking workflow or call the office directly. The production VPS version can enable API-backed requests after HIPAA controls are in place."}
+              : "Use the current online booking workflow or call the office directly. The office confirms the exact appointment time."}
           </p>
           <dl>
             <div>
@@ -231,9 +231,9 @@ export function BookingWidget({ services, practice }: BookingWidgetProps) {
           <div className="booking-form booking-handoff">
             <h3>Use the current secure booking workflow.</h3>
             <p>
-              This preview avoids storing patient-identifiable appointment requests. For now,
-              patients should continue through Virginia Dental Care's existing booking system or
-              call the office directly.
+              Continue through Virginia Dental Care's existing online booking system or call the
+              office directly. For privacy, keep medical details out of general appointment
+              messages.
             </p>
             <div className="handoff-actions">
               <a className="btn btn-primary" href={practice.bookingUrl}>
@@ -245,8 +245,8 @@ export function BookingWidget({ services, practice }: BookingWidgetProps) {
               </a>
             </div>
             <p className="notice">
-              Production VPS version: enable this form only after the API, database, backups,
-              logging, and any vendors are covered by the practice's HIPAA program and BAA review.
+              For urgent pain, swelling, trauma, or infection concerns, call the office so the team
+              can help triage timing and next steps.
             </p>
           </div>
         )}
