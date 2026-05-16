@@ -15,8 +15,9 @@ export function Hero({ practice }: HeroProps) {
           <span>Dental Care</span>
         </h1>
         <p>
-          Doctor-led dentistry in Arlington with family care, periodontal specialty support,
-          implant planning, cosmetic treatment, and urgent dental guidance in one office.
+          Doctor-led dental care in Arlington with family dentistry, periodontal specialty support,
+          implant planning, cosmetic treatment, and online appointment requests through the
+          practice's existing booking system.
         </p>
         <div className="hero-actions">
           <a className="btn btn-secondary" href="#services">
@@ -25,7 +26,7 @@ export function Hero({ practice }: HeroProps) {
           </a>
           <a className="btn btn-primary" href="#booking">
             <CalendarDays size={18} />
-            Request appointment
+            Request online
           </a>
           <a className="hero-call-link" href={`tel:${practice.phoneE164}`}>
             <Phone size={18} />

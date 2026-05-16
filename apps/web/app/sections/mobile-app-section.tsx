@@ -3,8 +3,8 @@ import { CalendarCheck, ClipboardList, MapPinned, PhoneCall } from "lucide-react
 const portalSteps = [
   {
     icon: CalendarCheck,
-    title: "Appointment requests",
-    text: "Send your contact details, care need, and preferred timing for office confirmation."
+    title: "Online booking",
+    text: "Continue to the appointment workflow the office already uses."
   },
   {
     icon: PhoneCall,
@@ -27,10 +27,10 @@ export function MobileAppSection() {
   return (
     <section className="mobile-app-section" id="app">
       <div className="mobile-app-copy">
-        <h2>Patient tools without extra searching.</h2>
+        <h2>Patient actions without extra searching.</h2>
         <p>
-          The mobile experience should keep practical actions close: request an appointment, call
-          the office, find directions, and review first-visit information.
+          The mobile experience keeps practical actions close: book online through the current
+          workflow, call the office, find directions, and review first-visit information.
         </p>
       </div>
 

@@ -78,11 +78,10 @@ export function BookingWidget({ services, practice }: BookingWidgetProps) {
   return (
     <section className="section booking-section" id="booking">
       <div className="section-heading">
-        <h2>Request an appointment.</h2>
+        <h2>Request through the current booking system.</h2>
         <p>
-          Choose a care path, then continue through the current secure booking workflow or call the
-          office. Please do not include symptoms, diagnoses, insurance details, or medical history
-          in a general appointment message.
+          Virginia Dental Care already uses online appointment booking. Choose a care path, continue
+          to the existing booking workflow, or call the office for urgent concerns.
         </p>
       </div>
 
@@ -229,16 +228,15 @@ export function BookingWidget({ services, practice }: BookingWidgetProps) {
           </form>
         ) : (
           <div className="booking-form booking-handoff">
-            <h3>Use the current secure booking workflow.</h3>
+            <h3>Continue to Virginia Dental Care's online booking.</h3>
             <p>
-              Continue through Virginia Dental Care's existing online booking system or call the
-              office directly. For privacy, keep medical details out of general appointment
-              messages.
+              The office continues to use its existing booking system, so this site should hand
+              patients to that workflow instead of collecting appointment details here.
             </p>
             <div className="handoff-actions">
               <a className="btn btn-primary" href={practice.bookingUrl}>
                 <CalendarDays size={18} />
-                Book online
+                Open booking
               </a>
               <a className="btn btn-secondary" href={`tel:${practice.phoneE164}`}>
                 Call {practice.phoneDisplay}

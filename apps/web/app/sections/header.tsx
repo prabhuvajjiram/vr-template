@@ -101,7 +101,7 @@ export function Header({ practice }: HeaderProps) {
         </button>
         <a className="btn btn-primary" href="#booking">
           <CalendarDays size={17} />
-          Request Appointment
+          Request
         </a>
       </div>
 
